@@ -21,13 +21,27 @@ public class ApplicationUser implements UserDetails {
     @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
     private Long id;
-    private String name;
-    private String username;
+    private String firstName;
+    private String lastName;
     private String password;
-    private String phone;
     private String email;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+    private Boolean locked = false;
+    private Boolean enabled = false;
+
+    public ApplicationUser(String firstName,
+                           String lastName,
+                           String password,
+                           String email,
+                           UserRole userRole
+                           ) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.userRole = userRole;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -42,7 +56,15 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     @Override
