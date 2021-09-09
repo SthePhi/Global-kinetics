@@ -35,7 +35,7 @@ public class ApplicationUser implements UserDetails {
                            String password,
                            String email,
                            UserRole userRole
-                           ) {
+    ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
